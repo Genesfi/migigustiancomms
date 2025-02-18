@@ -3,71 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Store</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Store Commission</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to My Store</h1>
-        <p>Click on a product to view more details!</p>
+        <h1>Store Commission</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">Contact</a>
+        </nav>
     </header>
 
-    <!-- Tempat Produk akan ditampilkan -->
-    <section id="products-list" class="products">
-        <!-- Produk akan ditambahkan oleh JavaScript -->
+    <section class="product-list">
+        <div class="product">
+            <img src="images/product1.jpg" alt="Product 1">
+            <h2>Product 1</h2>
+            <p>$50</p>
+            <a href="product.html?product=1" class="details-btn">View Details</a>
+        </div>
+        <div class="product">
+            <img src="images/product2.jpg" alt="Product 2">
+            <h2>Product 2</h2>
+            <p>$70</p>
+            <a href="product.html?product=2" class="details-btn">View Details</a>
+        </div>
     </section>
 
-    <script>
-        // Data produk awal
-        const products = JSON.parse(localStorage.getItem('products')) || [
-            {
-                id: 1,
-                name: "Product 1",
-                description: "This is a great product.",
-                imageUrl: "product1.jpg",
-                detailPage: "product1.html"
-            },
-            {
-                id: 2,
-                name: "Product 2",
-                description: "This is another great product.",
-                imageUrl: "product2.jpg",
-                detailPage: "product2.html"
-            }
-        ];
-
-        // Menampilkan produk di halaman
-        const productList = document.getElementById("products-list");
-
-        function displayProducts() {
-            productList.innerHTML = '';  // Clear list sebelum menampilkan produk baru
-            products.forEach(product => {
-                const productDiv = document.createElement("div");
-                productDiv.classList.add("product");
-
-                productDiv.innerHTML = `
-                    <h2>${product.name}</h2>
-                    <p>${product.description}</p>
-                    <img src="${product.imageUrl}" alt="${product.name}">
-                    <button class="view-detail-btn" data-id="${product.id}">View Details</button>
-                    <button class="buy-btn">Buy Now</button>
-                `;
-                productList.appendChild(productDiv);
-            });
-
-            // Menambahkan event listener untuk detail
-            const detailButtons = document.querySelectorAll('.view-detail-btn');
-            detailButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const productId = this.getAttribute('data-id');
-                    // Mengarahkan ke halaman detail produk dengan parameter ID produk
-                    window.location.href = `product-detail.html?id=${productId}`;
-                });
-            });
-        }
-
-        // Panggil fungsi untuk pertama kali menampilkan produk
-        displayProducts();
-    </script>
+    <footer>
+        <p>&copy; 2025 Store Commission. All rights reserved.</p>
+    </footer>
 </body>
 </html>
