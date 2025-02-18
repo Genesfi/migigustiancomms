@@ -1,69 +1,32 @@
-/* Reset default margin and padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* Existing styles remain the same */
 
-/* Set background color for the entire page */
-body {
-    background-color: #f0f8ff;
-    font-family: 'Arial', sans-serif;
-    padding: 20px;
-}
-
-/* Style for header */
-header {
+/* Style for product detail page */
+.product-detail {
     text-align: center;
-    padding: 50px 0;
-    background-color: #333;
-    color: white;
-    border-radius: 8px;
-}
-
-/* Style for h1 in header */
-header h1 {
-    font-size: 2.5rem;
-}
-
-/* Style for paragraph in header */
-header p {
-    font-size: 1.2rem;
-    margin-top: 10px;
-}
-
-/* Style for products section */
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-/* Style for each product card */
-.product {
+    padding: 30px;
     background-color: #fff;
-    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.product:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+.product-detail img {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
-/* Style for h2 in each product */
-.product h2 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #333;
+.product-detail .buy-btn {
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-top: 20px;
 }
 
-/* Style for paragraph inside each product */
-.product p {
-    font-size: 1rem;
-    color: #666;
+.product-detail .buy-btn:hover {
+    background-color: #555;
 }
