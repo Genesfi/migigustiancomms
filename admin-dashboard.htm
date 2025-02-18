@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, Admin!</h1>
+    <button onclick="addProduct()">Add New Product</button>
+    <button onclick="logOut()">Log Out</button>
+
+    <h2>Product Management</h2>
+    <!-- Daftar produk akan ditampilkan di sini -->
+
+    <script>
+      // Cek apakah admin sudah login
+      if (!localStorage.getItem('admin')) {
+        window.location.href = 'admin.html'; // Redirect ke halaman login jika belum login
+      }
+
+      function addProduct() {
+        // Logika untuk menambah produk baru (misalnya membuka form atau modal)
+        alert('Add product functionality goes here!');
+      }
+
+      function logOut() {
+        localStorage.removeItem('admin');
+        window.location.href = 'admin.html'; // Redirect ke login setelah logout
+      }
+    </script>
+</body>
+</html>
