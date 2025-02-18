@@ -11,7 +11,9 @@
     <button onclick="logOut()">Log Out</button>
 
     <h2>Product Management</h2>
-    <!-- Daftar produk akan ditampilkan di sini -->
+    <ul id="product-list">
+        <!-- Produk akan ditampilkan di sini -->
+    </ul>
 
     <script>
       // Cek apakah admin sudah login
@@ -20,14 +22,47 @@
       }
 
       function addProduct() {
-        // Logika untuk menambah produk baru (misalnya membuka form atau modal)
-        alert('Add product functionality goes here!');
+        const productName = prompt("Enter product name:");
+        const productPrice = prompt("Enter product price:");
+        const productImage = prompt("Enter product image URL:");
+
+        // Menyimpan data produk ke Firebase
+        const newProductRef = db.ref('products').push();
+        newProductRef.set({
+          name: productName,
+          price: productPrice,
+          image: productImage
+        }).then(() => {
+          alert('Product added!');
+          loadProducts(); // Reload daftar produk
+        });
       }
 
       function logOut() {
         localStorage.removeItem('admin');
-        window.location.href = 'admin.html'; // Redirect ke login setelah logout
+        firebase.auth().signOut();
+        window.location.href = 'admin.html';
       }
+
+      // Menampilkan daftar produk
+      function loadProducts() {
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = '';
+        db.ref('products').on('value', snapshot => {
+          snapshot.forEach(childSnapshot => {
+            const product = childSnapshot.val();
+            const li = document.createElement('li');
+            li.innerHTML = `
+              <img src="${product.image}" alt="${product.name}" width="100">
+              <h3>${product.name}</h3>
+              <p>Price: $${product.price}</p>
+            `;
+            productList.appendChild(li);
+          });
+        });
+      }
+
+      loadProducts(); // Memuat produk saat halaman dibuka
     </script>
 </body>
 </html>
