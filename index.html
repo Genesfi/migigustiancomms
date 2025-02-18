@@ -3,71 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Store</title>
+    <title>Product Detail</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to My Store</h1>
-        <p>Click on a product to view more details!</p>
+        <h1>Product Details</h1>
     </header>
 
-    <!-- Tempat Produk akan ditampilkan -->
-    <section id="products-list" class="products">
-        <!-- Produk akan ditambahkan oleh JavaScript -->
+    <section id="product-detail">
+        <!-- Detail produk akan dimuat disini -->
     </section>
 
     <script>
+        // Ambil ID produk dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
         // Data produk awal
-        const products = JSON.parse(localStorage.getItem('products')) || [
+        const products = [
             {
                 id: 1,
                 name: "Product 1",
                 description: "This is a great product.",
                 imageUrl: "product1.jpg",
-                detailPage: "product1.html"
+                price: "$100"
             },
             {
                 id: 2,
                 name: "Product 2",
                 description: "This is another great product.",
                 imageUrl: "product2.jpg",
-                detailPage: "product2.html"
+                price: "$150"
             }
         ];
 
-        // Menampilkan produk di halaman
-        const productList = document.getElementById("products-list");
+        // Temukan produk berdasarkan ID
+        const product = products.find(p => p.id == productId);
 
-        function displayProducts() {
-            productList.innerHTML = '';  // Clear list sebelum menampilkan produk baru
-            products.forEach(product => {
-                const productDiv = document.createElement("div");
-                productDiv.classList.add("product");
-
-                productDiv.innerHTML = `
-                    <h2>${product.name}</h2>
-                    <p>${product.description}</p>
-                    <img src="${product.imageUrl}" alt="${product.name}">
-                    <button class="view-detail-btn" data-id="${product.id}">View Details</button>
-                    <button class="buy-btn">Buy Now</button>
-                `;
-                productList.appendChild(productDiv);
-            });
-
-            // Menambahkan event listener untuk detail
-            const detailButtons = document.querySelectorAll('.view-detail-btn');
-            detailButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const productId = this.getAttribute('data-id');
-                    // Mengarahkan ke halaman detail produk dengan parameter ID produk
-                    window.location.href = `product-detail.html?id=${productId}`;
-                });
-            });
+        // Tampilkan detail produk
+        if (product) {
+            const productDetailSection = document.getElementById("product-detail");
+            productDetailSection.innerHTML = `
+                <h2>${product.name}</h2>
+                <img src="${product.imageUrl}" alt="${product.name}">
+                <p>${product.description}</p>
+                <p>Price: ${product.price}</p>
+                <button>Buy Now</button>
+            `;
+        } else {
+            document.getElementById("product-detail").innerHTML = "<p>Product not found</p>";
         }
-
-        // Panggil fungsi untuk pertama kali menampilkan produk
-        displayProducts();
     </script>
 </body>
 </html>
