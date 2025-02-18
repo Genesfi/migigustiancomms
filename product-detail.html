@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Product Detail</h1>
+    </header>
+
+    <section id="product-detail">
+        <!-- Detail produk akan dimuat di sini -->
+    </section>
+
+    <script>
+        // Data produk
+        const products = [
+            {
+                id: 1,
+                name: "Product 1",
+                description: "This is a great product.",
+                imageUrl: "product1.jpg",
+                price: "$100"
+            },
+            {
+                id: 2,
+                name: "Product 2",
+                description: "This is another great product.",
+                imageUrl: "product2.jpg",
+                price: "$150"
+            }
+        ];
+
+        // Mengambil ID produk dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        // Menampilkan detail produk sesuai ID
+        const product = products.find(p => p.id == productId);
+
+        if (product) {
+            const productDetailSection = document.getElementById("product-detail");
+            productDetailSection.innerHTML = `
+                <h2>${product.name}</h2>
+                <img src="${product.imageUrl}" alt="${product.name}">
+                <p>${product.description}</p>
+                <p>Price: ${product.price}</p>
+                <button>Buy Now</button>
+            `;
+        } else {
+            document.getElementById("product-detail").innerHTML = "<p>Product not found</p>";
+        }
+    </script>
+</body>
+</html>
