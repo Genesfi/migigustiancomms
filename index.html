@@ -76,11 +76,12 @@
             });
         }
 
-        // Menampilkan detail produk
+        // Menampilkan detail produk (pada halaman yang sama)
         function showProductDetail(productId) {
             const product = products.find(p => p.id == productId);
             if (product) {
-                alert(`Product Name: ${product.name}\nDescription: ${product.description}`);
+                // Menampilkan detail produk di halaman (misalnya dengan alert atau elemen baru)
+                alert(`Product Name: ${product.name}\nDescription: ${product.description}\nImage URL: ${product.imageUrl}\nDetail Page URL: ${product.detailPage}`);
             }
         }
 
