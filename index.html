@@ -17,46 +17,86 @@
         <!-- Produk akan ditambahkan oleh JavaScript -->
     </section>
 
+    <section>
+        <h3>Add New Product</h3>
+        <form id="add-product-form">
+            <input type="text" id="product-name" placeholder="Product Name" required>
+            <input type="text" id="product-description" placeholder="Product Description" required>
+            <input type="text" id="product-image" placeholder="Image URL" required>
+            <input type="text" id="product-detail" placeholder="Detail Page URL" required>
+            <button type="submit">Add Product</button>
+        </form>
+    </section>
+
     <script>
-        // Data produk, cukup menambahkan data produk di sini
-        const products = [
+        // Data produk awal
+        const products = JSON.parse(localStorage.getItem('products')) || [
             {
                 name: "Product 1",
                 description: "This is a great product.",
                 imageUrl: "product1.jpg",
-                detailPage: "product1.html" // Halaman detail produk 1
+                detailPage: "product1.html"
             },
             {
                 name: "Product 2",
                 description: "This is another great product.",
                 imageUrl: "product2.jpg",
-                detailPage: "product2.html" // Halaman detail produk 2
-            },
-            {
-                name: "Product 3",
-                description: "This is yet another great product.",
-                imageUrl: "product3.jpg",
-                detailPage: "product3.html" // Halaman detail produk 3
+                detailPage: "product2.html"
             }
         ];
 
         // Menampilkan produk di halaman
         const productList = document.getElementById("products-list");
 
-        // Loop untuk menambahkan produk
-        products.forEach(product => {
-            const productDiv = document.createElement("div");
-            productDiv.classList.add("product");
+        function displayProducts() {
+            productList.innerHTML = '';  // Clear list sebelum menampilkan produk baru
+            products.forEach(product => {
+                const productDiv = document.createElement("div");
+                productDiv.classList.add("product");
 
-            // Menambahkan informasi produk ke dalam HTML
-            productDiv.innerHTML = `
-                <h2>${product.name}</h2>
-                <p>${product.description}</p>
-                <a href="${product.detailPage}">View Details</a> <!-- Link ke halaman detail produk -->
-                <button class="buy-btn">Buy Now</button> <!-- Tombol Beli -->
-            `;
-            productList.appendChild(productDiv);
+                productDiv.innerHTML = `
+                    <h2>${product.name}</h2>
+                    <p>${product.description}</p>
+                    <img src="${product.imageUrl}" alt="${product.name}">
+                    <a href="${product.detailPage}">View Details</a>
+                    <button class="buy-btn">Buy Now</button>
+                `;
+                productList.appendChild(productDiv);
+            });
+        }
+
+        // Fungsi untuk menambah produk
+        const addProductForm = document.getElementById('add-product-form');
+        addProductForm.addEventListener('submit', function(event) {
+            event.preventDefault();  // Mencegah form submit default
+
+            // Ambil nilai dari input form
+            const productName = document.getElementById('product-name').value;
+            const productDescription = document.getElementById('product-description').value;
+            const productImage = document.getElementById('product-image').value;
+            const productDetail = document.getElementById('product-detail').value;
+
+            // Tambah produk baru ke array produk
+            const newProduct = {
+                name: productName,
+                description: productDescription,
+                imageUrl: productImage,
+                detailPage: productDetail
+            };
+
+            products.push(newProduct);  // Tambahkan produk ke array
+
+            // Simpan produk ke localStorage agar tetap ada walau halaman dimuat ulang
+            localStorage.setItem('products', JSON.stringify(products));
+
+            displayProducts();  // Tampilkan produk yang sudah diperbarui
+
+            // Reset form
+            addProductForm.reset();
         });
+
+        // Panggil fungsi untuk pertama kali menampilkan produk
+        displayProducts();
     </script>
 </body>
 </html>
