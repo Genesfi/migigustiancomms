@@ -1,38 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store Commission</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Store Commission</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="#">Shop</a>
-            <a href="#">Contact</a>
-        </nav>
-    </header>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
 
-    <section class="product-list">
-        <div class="product">
-            <img src="images/product1.jpg" alt="Product 1">
-            <h2>Product 1</h2>
-            <p>$50</p>
-            <a href="product.html?product=1" class="details-btn">View Details</a>
-        </div>
-        <div class="product">
-            <img src="images/product2.jpg" alt="Product 2">
-            <h2>Product 2</h2>
-            <p>$70</p>
-            <a href="product.html?product=2" class="details-btn">View Details</a>
-        </div>
-    </section>
+<script>
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    databaseURL: "YOUR_DATABASE_URL",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
 
-    <footer>
-        <p>&copy; 2025 Store Commission. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.database();
+</script>
