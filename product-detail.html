@@ -8,15 +8,19 @@
 </head>
 <body>
     <header>
-        <h1>Product Detail</h1>
+        <h1>Product Details</h1>
     </header>
 
     <section id="product-detail">
-        <!-- Detail produk akan dimuat di sini -->
+        <!-- Detail produk akan dimuat disini -->
     </section>
 
     <script>
-        // Data produk
+        // Ambil ID produk dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');  // Mengambil ID produk dari URL
+
+        // Data produk awal
         const products = [
             {
                 id: 1,
@@ -34,13 +38,10 @@
             }
         ];
 
-        // Mengambil ID produk dari URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const productId = urlParams.get('id');
-
-        // Menampilkan detail produk sesuai ID
+        // Temukan produk berdasarkan ID
         const product = products.find(p => p.id == productId);
 
+        // Tampilkan detail produk jika ditemukan
         if (product) {
             const productDetailSection = document.getElementById("product-detail");
             productDetailSection.innerHTML = `
@@ -51,6 +52,7 @@
                 <button>Buy Now</button>
             `;
         } else {
+            // Jika produk tidak ditemukan
             document.getElementById("product-detail").innerHTML = "<p>Product not found</p>";
         }
     </script>
