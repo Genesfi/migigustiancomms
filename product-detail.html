@@ -4,57 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Product Details</h1>
+        <h1>Store Commission</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">Contact</a>
+        </nav>
     </header>
 
-    <section id="product-detail">
-        <!-- Detail produk akan dimuat disini -->
+    <section class="product-detail">
+        <h2>Product 1</h2>
+        <img src="images/product1.jpg" alt="Product 1">
+        <p class="price">$50</p>
+        <p>This is a great product with amazing features!</p>
+        <button>Add to Cart</button>
     </section>
 
-    <script>
-        // Ambil ID produk dari URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const productId = urlParams.get('id');  // Mengambil ID produk dari URL
-
-        // Data produk awal
-        const products = [
-            {
-                id: 1,
-                name: "Product 1",
-                description: "This is a great product.",
-                imageUrl: "product1.jpg",
-                price: "$100"
-            },
-            {
-                id: 2,
-                name: "Product 2",
-                description: "This is another great product.",
-                imageUrl: "product2.jpg",
-                price: "$150"
-            }
-        ];
-
-        // Temukan produk berdasarkan ID
-        const product = products.find(p => p.id == productId);
-
-        // Tampilkan detail produk jika ditemukan
-        if (product) {
-            const productDetailSection = document.getElementById("product-detail");
-            productDetailSection.innerHTML = `
-                <h2>${product.name}</h2>
-                <img src="${product.imageUrl}" alt="${product.name}">
-                <p>${product.description}</p>
-                <p>Price: ${product.price}</p>
-                <button>Buy Now</button>
-            `;
-        } else {
-            // Jika produk tidak ditemukan
-            document.getElementById("product-detail").innerHTML = "<p>Product not found</p>";
-        }
-    </script>
+    <footer>
+        <p>&copy; 2025 Store Commission. All rights reserved.</p>
+    </footer>
 </body>
 </html>
