@@ -32,12 +32,14 @@
         // Data produk awal
         const products = JSON.parse(localStorage.getItem('products')) || [
             {
+                id: 1,
                 name: "Product 1",
                 description: "This is a great product.",
                 imageUrl: "product1.jpg",
                 detailPage: "product1.html"
             },
             {
+                id: 2,
                 name: "Product 2",
                 description: "This is another great product.",
                 imageUrl: "product2.jpg",
@@ -58,11 +60,28 @@
                     <h2>${product.name}</h2>
                     <p>${product.description}</p>
                     <img src="${product.imageUrl}" alt="${product.name}">
-                    <a href="${product.detailPage}">View Details</a>
+                    <button class="view-detail-btn" data-id="${product.id}">View Details</button>
                     <button class="buy-btn">Buy Now</button>
                 `;
                 productList.appendChild(productDiv);
             });
+
+            // Menambahkan event listener untuk detail
+            const detailButtons = document.querySelectorAll('.view-detail-btn');
+            detailButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-id');
+                    showProductDetail(productId);
+                });
+            });
+        }
+
+        // Menampilkan detail produk
+        function showProductDetail(productId) {
+            const product = products.find(p => p.id == productId);
+            if (product) {
+                alert(`Product Name: ${product.name}\nDescription: ${product.description}`);
+            }
         }
 
         // Fungsi untuk menambah produk
@@ -78,6 +97,7 @@
 
             // Tambah produk baru ke array produk
             const newProduct = {
+                id: products.length + 1,  // ID unik untuk produk baru
                 name: productName,
                 description: productDescription,
                 imageUrl: productImage,
